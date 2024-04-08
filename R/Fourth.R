@@ -1,0 +1,8 @@
+cancer <- read.csv("C:/Users/Dell/OneDrive/Desktop/sem 6/lungcancer.csv", head = TRUE, sep = "," )
+library(dplyr)
+library(randomForest)
+LUNG_CANCER <- na.omit(subset(cancer, select = c(FATIGUE, ALLERGY, AGE, ANXIETY, WHEEZING, COUGHING, SMOKING)))
+head(LUNG_CANCER)
+fatigue_vs_shortnessOfBreadth <- randomForest(as.factor(FATIGUE)~ ALLERGY + WHEEZING + COUGHING + ANXIETY + SMOKING, data = LUNG_CANCER, ntree = 10)
+varImpPlot(fatigue_vs_shortnessOfBreadth)
+importance(fatigue_vs_shortnessOfBreadth)
